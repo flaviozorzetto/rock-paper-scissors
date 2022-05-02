@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import colors from '../../functions/Colors';
-import Layout from '../../functions/Layout';
+import colors from '../../../functions/Colors';
+import Layout from '../../../functions/Layout';
 
 const ScoreBoardComp = styled.div`
    width: 100%;
@@ -41,6 +41,10 @@ const Score = styled.div`
 `;
 
 export default function ScoreBoard(props) {
+   const increaseScore = () => {
+      props.setScoreClicks(prevState => prevState + 1);
+   };
+
    return (
       <ScoreBoardComp>
          <Layout.wrapper justify="space-between" align="center">
@@ -49,7 +53,7 @@ export default function ScoreBoard(props) {
                <p>paper</p>
                <p>scissors</p>
             </GameMode>
-            <Score>
+            <Score onClick={increaseScore}>
                <p className="score">score</p>
                <p className="score-value">{props.score}</p>
             </Score>
