@@ -18,26 +18,11 @@ const Connector = styled.div`
    width: 100%;
    height: 400px;
 
-   ${props => {
-      if (props.gameMode == 'secret') {
-         return `{
-           background-image: ${`url(${bgPentagon})`};
-           background-size: 70%;
-           background-position: center;
-           background-repeat: no-repeat;
-            }; `;
-      } else {
-         return `
-            background-image: ${`url(${bgTriangle})`};
-            background-position: center;
-            background-repeat: no-repeat;
-            background-position-y: 30px;
-            background-size: 70%;
-        `;
-      }
-   }}
-
-   #rock, #paper, #scissor, #lizard, #spock {
+   #rock,
+   #paper,
+   #scissor,
+   #lizard,
+   #spock {
       position: absolute;
    }
 
