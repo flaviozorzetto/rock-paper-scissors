@@ -1,47 +1,48 @@
-import styled from 'styled-components';
-import colors from '../functions/Colors';
 import { useEffect, useState } from 'react';
 import Header from './components/Header/Header';
 import Game from './components/Game';
-import Layout from '../functions/Layout';
-
-const Background = styled.div`
-   background: ${colors.background.bck};
-   width: 100%;
-   height: 100vh;
-`;
+import GameRule from './components/GameProps/GameRule';
 
 export default function App() {
-   const [score, setScore] = useState(0);
-   const [scoreClicks, setScoreClicks] = useState(0);
+   const [score, setScore] = useState(
+      JSON.parse(localStorage.getItem('score')) || 0
+   );
    const [gameMode, setGameMode] = useState('default');
+   const [gameRuleOpen, setGameRuleOpen] = useState(false);
 
    useEffect(() => {
-      if (scoreClicks == 30) {
-         setGameMode('secret');
+      localStorage.setItem('score', score);
+   }, [score]);
+
+   function updateScoreLocalStorage(e) {
+      if (e.key == 'score') {
+         if (e.newValue == '' || e.newValue == null) {
+            setScore(0);
+         } else {
+            setScore(JSON.parse(e.newValue));
+         }
       }
-      // console.log('You clicked ' + scoreClicks + ' times!');
-   }, [scoreClicks]);
+   }
 
    useEffect(() => {
-      // console.log('You are playing ' + gameMode + ' mode!');
-   }, [gameMode]);
+      window.addEventListener('storage', updateScoreLocalStorage);
+      return () => {
+         window.removeEventListener('storage', updateScoreLocalStorage);
+      };
+   }, []);
 
    return (
-      <Background>
-         <Layout.container
-            padding="40px 0 0 0"
-            max_width="960px"
-            next_widths={[['1000px', '780px']]}
-         >
-            <Header
-               score={score}
-               scoreClicks={scoreClicks}
-               setGameMode={setGameMode}
-               setScoreClicks={setScoreClicks}
-            />
-            <Game gameMode={gameMode} setScore={setScore} />
-         </Layout.container>
-      </Background>
+      <>
+         <Header score={score} setGameMode={setGameMode} gameMode={gameMode} />
+         <Game
+            setGameMode={setGameMode}
+            gameMode={gameMode}
+            setScore={setScore}
+            setGameRuleOpen={setGameRuleOpen}
+         />
+         {gameRuleOpen ? (
+            <GameRule gameMode={gameMode} setGameRuleOpen={setGameRuleOpen} />
+         ) : null}
+      </>
    );
 }

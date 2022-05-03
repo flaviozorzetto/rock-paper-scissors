@@ -1,6 +1,6 @@
 let colors = {
    primary: {
-      cyan: 'radial-gradient(hsl(189, 59%, 53%), hsl(189, 58%, 57%))',
+      spock: 'radial-gradient(hsl(189, 59%, 53%), hsl(189, 58%, 57%))',
       scissors: 'radial-gradient(hsl(39, 89%, 49%),hsl(40, 84%, 53%))',
       paper: 'radial-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%))',
       rock: 'radial-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%))',

@@ -16,6 +16,9 @@ const GameMode = styled.div`
       line-height: 0.9em;
       font-size: 2em;
       text-transform: uppercase;
+      @media screen and (max-width: 475px) {
+         font-size: 1em;
+      }
    }
 `;
 
@@ -23,6 +26,7 @@ const Score = styled.div`
    border-radius: 10px;
    background-color: white;
    padding: 10px 40px;
+   user-select: none;
 
    .score {
       color: ${colors.neutral.score};
@@ -41,10 +45,6 @@ const Score = styled.div`
 `;
 
 export default function ScoreBoard(props) {
-   const increaseScore = () => {
-      props.setScoreClicks(prevState => prevState + 1);
-   };
-
    return (
       <ScoreBoardComp>
          <Layout.wrapper justify="space-between" align="center">
@@ -52,8 +52,10 @@ export default function ScoreBoard(props) {
                <p>rock</p>
                <p>paper</p>
                <p>scissors</p>
+               {props.gameMode == 'secret' ? <p>lizard</p> : null}
+               {props.gameMode == 'secret' ? <p>spock</p> : null}
             </GameMode>
-            <Score onClick={increaseScore}>
+            <Score>
                <p className="score">score</p>
                <p className="score-value">{props.score}</p>
             </Score>

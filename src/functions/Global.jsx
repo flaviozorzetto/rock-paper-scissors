@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import colors from './Colors';
 
 export default createGlobalStyle`
     *, *::before, *::after {
@@ -9,9 +10,15 @@ export default createGlobalStyle`
         font-weight: normal;
         outline: none;
         border: none;
+        font-family: 'Barlow Semi Condensed', sans-serif;
     }
 
     body {
-        font-family: 'Barlow Semi Condensed', sans-serif;
+        height: 100vh;
+        background: ${colors.background.bck};
+
+        #root {
+            height: 100%;
+        }
     }
 `;
